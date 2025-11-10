@@ -1,27 +1,17 @@
 function getArrayParams(...arr) {
+    let min = Infinity;
+    let max = -Infinity;
+    let sum = 0;
 
-	let min = Infinity;
-	let max = -Infinity;
-	let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        const current = arr[i];
+        if (current < min) min = current;
+        if (current > max) max = current;
+        sum += current;
+    }
 
-	for (let i = 0; i < arr.length; i++) {
-		const current = arr[i];
-		if (current < min) {
-			min = current;
-		}
-		if (current > max) {
-			max = current;
-		}
-
-		sum += current;
-	}
-
-	const avg = Number((sum / arr.length).toFixed(2));
-	return {
-		min: min,
-		max: max,
-		avg: avg
-	};
+    const avg = Number((sum / arr.length).toFixed(2));
+    return { min, max, avg };
 }
 
 function summElementsWorker(...arr) {
