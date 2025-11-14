@@ -1,19 +1,36 @@
 function Student(name, gender, age) {
-  
+	this.name = name;
+	this.gender = gender;
+	this.age = age;
+	this.marks = [];
 }
 
-Student.prototype.setSubject = function (subjectName) {
-  
-}
+Student.prototype.setSubject = function(subjectName) {
+	this.subject = subjectName;
+};
 
-Student.prototype.addMarks = function (...marks) {
-  
-}
+Student.prototype.addMarks = function(...marksToAdd) {
+	if (!Array.isArray(this.marks)) {
+		console.error("Невозможно добавить оценки: студент отчислен");
+		return;
+	}
+	this.marks.push(...marksToAdd);
+};
 
-Student.prototype.getAverage = function () {
-  
-}
+Student.prototype.getAverage = function() {
+	if (!Array.isArray(this.marks) || this.marks.length === 0) {
+		return 0;
+	}
 
-Student.prototype.exclude = function (reason) {
-  
-}
+	const sum = this.marks.reduce((accumulator, current) => accumulator + current, 0);
+	return sum / this.marks.length;
+};
+
+Student.prototype.exclude = function(reason) {
+	delete this.subject;
+	delete this.marks;
+	this.excluded = reason;
+};
+
+const student1 = new Student("Василиса", "женский", 19);
+const student2 = new Student("Артем", "мужской", 25);
