@@ -1,4 +1,4 @@
-﻿// Задача 1 
+﻿// Задача 1
 function parseCount(value) {
     let result = Number.parseFloat(value);
     if (isNaN(result)) {
@@ -10,8 +10,8 @@ function parseCount(value) {
 function validateCount(value) {
     try {
         return parseCount(value);
-    } catch (error) {
-        return error;
+    } catch (err) {
+        return err;
     }
 }
 
@@ -22,18 +22,17 @@ class Triangle {
         this.b = b;
         this.c = c;
         
-        // Проверка существования треугольника
         if (a + b <= c || a + c <= b || b + c <= a) {
             throw new Error("Треугольник с такими сторонами не существует");
         }
     }
 
-    getPerimeter() {
+    get perimeter() {
         return this.a + this.b + this.c;
     }
 
-    getArea() {
-        const p = this.getPerimeter() / 2;
+    get area() {
+        const p = this.perimeter / 2;
         const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
         return Number(area.toFixed(3));
     }
@@ -42,12 +41,12 @@ class Triangle {
 function getTriangle(a, b, c) {
     try {
         return new Triangle(a, b, c);
-    } catch (error) {
+    } catch (err) {
         return {
-            getArea: function() {
+            get area() {
                 return "Ошибка! Треугольник не существует";
             },
-            getPerimeter: function() {
+            get perimeter() {
                 return "Ошибка! Треугольник не существует";
             }
         };
