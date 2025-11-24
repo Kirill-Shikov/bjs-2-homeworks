@@ -1,54 +1,52 @@
 ﻿// ЗАДАЧА 1
-window.parseCount = function(value) {
+function parseCount(value) {
     const parsedValue = Number.parseFloat(value);
     if (isNaN(parsedValue)) {
         throw new Error("Невалидное значение");
     }
     return parsedValue;
-};
+}
 
-window.validateCount = function(value) {
+function validateCount(value) {
     try {
-        return window.parseCount(value);
+        return parseCount(value);
     } catch (error) {
         return error;
     }
-};
+}
 
 // ЗАДАЧА 2
-window.Triangle = class {
-    constructor(a, b, c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        
-        if (a + b <= c || a + c <= b || b + c <= a) {
-            throw new Error("Треугольник с такими сторонами не существует");
-        }
+function Triangle(a, b, c) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+    
+    if (a + b <= c || a + c <= b || b + c <= a) {
+        throw new Error("Треугольник с такими сторонами не существует");
     }
+}
 
-    get perimeter() {
-        return this.a + this.b + this.c;
-    }
-
-    get area() {
-        const p = this.perimeter / 2;
-        const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
-        return Number(area.toFixed(3));
-    }
+Triangle.prototype.perimeter = function() {
+    return this.a + this.b + this.c;
 };
 
-window.getTriangle = function(a, b, c) {
+Triangle.prototype.area = function() {
+    const p = this.perimeter() / 2;
+    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    return Number(area.toFixed(3));
+};
+
+function getTriangle(a, b, c) {
     try {
-        return new window.Triangle(a, b, c);
+        return new Triangle(a, b, c);
     } catch (error) {
         return {
-            get area() {
+            area: function() {
                 return "Ошибка! Треугольник не существует";
             },
-            get perimeter() {
+            perimeter: function() {
                 return "Ошибка! Треугольник не существует";
             }
         };
     }
-};
+}
