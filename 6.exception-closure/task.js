@@ -17,7 +17,7 @@ function validateCount(value) {
 
 // ЗАДАЧА 2
 class Triangle {
-    constructor(a, b, c) { 
+    constructor(a, b, c) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -33,8 +33,8 @@ class Triangle {
 
     get area() {
         const p = this.perimeter / 2;
-        const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)); 
-        return parseFloat(area.toFixed(3)); 
+        const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+        return Number(area.toFixed(3));
     }
 }
 
@@ -43,10 +43,10 @@ function getTriangle(a, b, c) {
         return new Triangle(a, b, c);
     } catch (error) {
         return {
-            get area() { 
+            get area() {
                 return "Ошибка! Треугольник не существует";
             },
-            get perimeter() { 
+            get perimeter() {
                 return "Ошибка! Треугольник не существует";
             }
         };
