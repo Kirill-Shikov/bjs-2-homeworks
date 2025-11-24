@@ -1,22 +1,22 @@
 ﻿// ЗАДАЧА 1
-function parseCount(value) {
+window.parseCount = function(value) {
     const parsedValue = Number.parseFloat(value);
     if (isNaN(parsedValue)) {
         throw new Error("Невалидное значение");
     }
     return parsedValue;
-}
+};
 
-function validateCount(value) {
+window.validateCount = function(value) {
     try {
-        return parseCount(value);
+        return window.parseCount(value);
     } catch (error) {
         return error;
     }
-}
+};
 
 // ЗАДАЧА 2
-class Triangle {
+window.Triangle = class {
     constructor(a, b, c) {
         this.a = a;
         this.b = b;
@@ -36,11 +36,11 @@ class Triangle {
         const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
         return Number(area.toFixed(3));
     }
-}
+};
 
-function getTriangle(a, b, c) {
+window.getTriangle = function(a, b, c) {
     try {
-        return new Triangle(a, b, c);
+        return new window.Triangle(a, b, c);
     } catch (error) {
         return {
             get area() {
@@ -51,4 +51,4 @@ function getTriangle(a, b, c) {
             }
         };
     }
-}
+};
